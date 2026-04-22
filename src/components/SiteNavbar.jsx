@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function SiteNavbar() {
+export default function SiteNavbar({ cartCount = 0 }) {
   return (
     <nav className="navbar navbar-expand-lg custom-navbar">
       <div className="container-fluid px-4 px-lg-5">
@@ -49,7 +49,7 @@ export default function SiteNavbar() {
             </li>
             <li className="nav-item">
               <Link className="nav-link custom-nav-link" to="/cart">
-                Cart
+                Cart ({cartCount})
               </Link>
             </li>
           </ul>
