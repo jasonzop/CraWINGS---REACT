@@ -11,12 +11,20 @@ import Cart from "./pages/Cart";
 import SiteNavbar from "./components/SiteNavbar";
 import SiteFooter from "./components/SiteFooter";
 
+const API_BASE =
+  window.location.hostname.includes("github.dev")
+    ? `${window.location.protocol}//${window.location.hostname.replace(
+        "5173",
+        "5000"
+      )}`
+    : "http://localhost:5000";
+
 export default function App() {
   const [cartItems, setCartItems] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/menu")
+    fetch(`${API_BASE}/api/menu`)
       .then((res) => res.json())
       .then((data) => setMenuItems(data))
       .catch((err) => console.log(err));
@@ -43,9 +51,7 @@ export default function App() {
   function increaseQty(id) {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item._id === id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
+        item._id === id ? { ...item, quantity: item.quantity + 1 } : item
       )
     );
   }
@@ -54,18 +60,14 @@ export default function App() {
     setCartItems((prevItems) =>
       prevItems
         .map((item) =>
-          item._id === id
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
+          item._id === id ? { ...item, quantity: item.quantity - 1 } : item
         )
         .filter((item) => item.quantity > 0)
     );
   }
 
   function removeItem(id) {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item._id !== id)
-    );
+    setCartItems((prevItems) => prevItems.filter((item) => item._id !== id));
   }
 
   async function checkout() {
@@ -75,24 +77,20 @@ export default function App() {
         0
       );
 
-      const response = await fetch(
-        "http://localhost:5000/api/orders",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            items: cartItems,
-            total,
-          }),
-        }
-      );
+      const response = await fetch(`${API_BASE}/api/orders`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          items: cartItems,
+          total,
+        }),
+      });
 
       await response.json();
 
       alert("Order placed successfully!");
-
       setCartItems([]);
     } catch (error) {
       console.log(error);
@@ -103,10 +101,7 @@ export default function App() {
   return (
     <div className="app-wrapper">
       <SiteNavbar
-        cartCount={cartItems.reduce(
-          (sum, item) => sum + item.quantity,
-          0
-        )}
+        cartCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
       />
 
       <Routes>
@@ -114,12 +109,7 @@ export default function App() {
 
         <Route
           path="/menu"
-          element={
-            <Menu
-              menuItems={menuItems}
-              addToCart={addToCart}
-            />
-          }
+          element={<Menu menuItems={menuItems} addToCart={addToCart} />}
         />
 
         <Route path="/about" element={<About />} />
