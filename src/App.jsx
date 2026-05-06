@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
 import Cart from "./pages/Cart";
+import "./mobile.css";
 
 import SiteNavbar from "./components/SiteNavbar";
 import SiteFooter from "./components/SiteFooter";
