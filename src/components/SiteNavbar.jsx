@@ -8,10 +8,6 @@ export default function SiteNavbar({ cartCount }) {
     setMenuOpen(false);
   }
 
-  function toggleMenu() {
-    setMenuOpen((prev) => !prev);
-  }
-
   return (
     <nav className="navbar custom-navbar">
       <div className="container-fluid px-4">
@@ -22,33 +18,28 @@ export default function SiteNavbar({ cartCount }) {
         <button
           className="hamburger-btn"
           type="button"
-          onClick={toggleMenu}
+          onClick={() => setMenuOpen((prev) => !prev)}
           aria-label="Toggle navigation"
         >
           ☰
         </button>
 
-        <div className={`nav-links-row d-flex ms-auto ${menuOpen ? "mobile-open" : ""}`}>
+        <div className={`nav-links-row ${menuOpen ? "mobile-open" : ""}`}>
           <Link className="nav-link custom-nav-link" to="/" onClick={closeMenu}>
             Home
           </Link>
-
           <Link className="nav-link custom-nav-link" to="/menu" onClick={closeMenu}>
             Menu
           </Link>
-
           <Link className="nav-link custom-nav-link" to="/about" onClick={closeMenu}>
             About
           </Link>
-
           <Link className="nav-link custom-nav-link" to="/contact" onClick={closeMenu}>
             Contact
           </Link>
-
           <Link className="nav-link custom-nav-link" to="/gallery" onClick={closeMenu}>
             Gallery
           </Link>
-
           <Link className="nav-link custom-nav-link" to="/cart" onClick={closeMenu}>
             Cart ({cartCount})
           </Link>

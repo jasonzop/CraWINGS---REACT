@@ -4,11 +4,27 @@
   display: none;
 }
 
+/* DESKTOP NAVBAR - KEEP NORMAL WEBSITE VERSION */
+@media (min-width: 769px) {
+  .nav-links-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    margin-left: auto;
+    gap: 0.75rem;
+  }
+
+  .hamburger-btn {
+    display: none !important;
+  }
+}
+
+/* MOBILE ONLY */
 @media (max-width: 768px) {
   .custom-navbar {
     position: relative;
-    z-index: 1000;
-    padding: 18px 20px !important;
+    z-index: 9999;
+    padding: 16px 18px !important;
   }
 
   .brand-logo {
@@ -16,43 +32,46 @@
   }
 
   .hamburger-btn {
-    display: block;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 52px;
     background: white;
     color: black;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 2rem;
-    width: 58px;
-    height: 52px;
     font-weight: 700;
-    line-height: 1;
+    cursor: pointer;
   }
 
   .nav-links-row {
-    position: absolute;
-    top: 78px;
-    right: 18px;
-    width: 210px;
-    background: rgba(0, 0, 0, 0.97);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 16px;
-    padding: 10px 0;
     display: none !important;
+  }
+
+  .nav-links-row.mobile-open {
+    position: absolute;
+    top: 82px;
+    right: 16px;
+    width: 220px;
+    background: rgba(0, 0, 0, 0.97);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    padding: 12px 0;
+    display: flex !important;
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 0 !important;
     box-shadow: 0 14px 30px rgba(0, 0, 0, 0.6);
   }
 
-  .nav-links-row.mobile-open {
-    display: flex !important;
-  }
-
   .custom-nav-link {
     width: 100%;
-    padding: 13px 18px !important;
-    font-size: 1.1rem !important;
+    padding: 15px 22px !important;
+    font-size: 1.15rem !important;
     text-align: left;
+    color: white !important;
   }
 
   .custom-nav-link:hover {
@@ -61,18 +80,21 @@
 
   .menu-page-title,
   .cart-title,
-  .contact-page-title {
-    font-size: 2.2rem !important;
+  .contact-page-title,
+  .gallery-page-title,
+  .about-page-title {
+    font-size: 2.3rem !important;
   }
 
   .menu-card-old {
-    max-width: 92%;
-    padding: 18px 12px;
+    width: 92%;
+    margin: 0 auto;
+    padding: 18px 14px;
   }
 
   .menu-card-img {
-    max-width: 170px;
-    height: 115px;
+    max-width: 180px;
+    height: auto;
   }
 
   .cart-box {
@@ -83,9 +105,16 @@
   .cart-item-row {
     flex-direction: column;
     align-items: flex-start;
+    gap: 14px;
+  }
+
+  .cart-actions {
+    width: 100%;
+    flex-wrap: wrap;
   }
 
   .custom-footer-home {
     text-align: center;
+    padding: 30px 20px;
   }
 }
