@@ -18,7 +18,7 @@ const API_BASE =
         "5173",
         "5000"
       )}`
-    : "http://localhost:5000";
+    : "https://crawings-react.onrender.com";
 
 export default function App() {
   const [cartItems, setCartItems] = useState([]);
